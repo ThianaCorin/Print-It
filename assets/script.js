@@ -17,22 +17,35 @@ const slides = [
 	}
 ]
 
+let currentSlide = 0
+const bannerImg = document.querySelector(".banner-img");
+const bannerText = document.querySelector("#banner p");
+
+
 // Ajout eventListener sur les fleches
 
 let arrowLeft = document.getElementById("arrow_left");
 let arrowRight = document.getElementById("arrow_right");
 
 arrowLeft.addEventListener("click", () => {
-	console.log("click gauche")
+	currentSlide--;
+	updateSlide();
+	bannerText.innerHTML = slides[currentSlide].tagLine;
+
 })
 
 arrowRight.addEventListener("click", () => {
-	console.log("click droit")
+	currentSlide++;
+	updateSlide();
+	bannerText.innerHTML = slides[currentSlide].tagLine;
+
+
+
 })
 
 // Ajout bullet points
 const dotsContainer = document.querySelector(".dots");
-console.log(slides.length);
+// console.log(slides.length);
 
 for (let i = 0; i < slides.length; i++) { 
 	let dot = document.createElement("span");
@@ -42,5 +55,12 @@ for (let i = 0; i < slides.length; i++) {
 		dot.classList.add("dot_selected");
 	}
 
-// let slide = getElementById("banner");
-// slide.src = 
+	const dots = document.querySelectorAll(".dot");
+function updateSlide() {
+	bannerImg.src = "./assets/images/slideshow/" + slides[currentSlide].image;
+	dots.forEach(dot => dot.classList.remove("dot_selected"));
+dots[currentSlide].classList.add("dot_selected");
+
+	}
+
+
