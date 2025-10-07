@@ -28,19 +28,18 @@ let arrowLeft = document.getElementById("arrow_left");
 let arrowRight = document.getElementById("arrow_right");
 
 arrowLeft.addEventListener("click", () => {
-	currentSlide--;
+	currentSlide--;	
+	if (currentSlide < 0 ) {
+		currentSlide = slides.length -1 }
 	updateSlide();
-	bannerText.innerHTML = slides[currentSlide].tagLine;
-
 })
 
 arrowRight.addEventListener("click", () => {
 	currentSlide++;
+	if (currentSlide >= slides.length) {
+		currentSlide = 0 }
 	updateSlide();
-	bannerText.innerHTML = slides[currentSlide].tagLine;
-
-
-
+	
 })
 
 // Ajout bullet points
@@ -58,6 +57,7 @@ for (let i = 0; i < slides.length; i++) {
 	const dots = document.querySelectorAll(".dot");
 function updateSlide() {
 	bannerImg.src = "./assets/images/slideshow/" + slides[currentSlide].image;
+	bannerText.innerHTML = slides[currentSlide].tagLine;
 	dots.forEach(dot => dot.classList.remove("dot_selected"));
 dots[currentSlide].classList.add("dot_selected");
 
