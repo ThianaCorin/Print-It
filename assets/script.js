@@ -54,13 +54,18 @@ for (let i = 0; i < slides.length; i++) {
 		dot.classList.add("dot_selected");
 	}
 
-	const dots = document.querySelectorAll(".dot");
+const dots = document.querySelectorAll(".dot");
+
 function updateSlide() {
 	bannerImg.src = "./assets/images/slideshow/" + slides[currentSlide].image;
 	bannerText.innerHTML = slides[currentSlide].tagLine;
 	dots.forEach(dot => dot.classList.remove("dot_selected"));
 dots[currentSlide].classList.add("dot_selected");
-
 	}
 
-
+	function autoSlide() {
+    currentSlide++;
+    if (currentSlide >= slides.length) currentSlide = 0;
+    updateSlide();
+}
+setInterval(autoSlide, 4000);
